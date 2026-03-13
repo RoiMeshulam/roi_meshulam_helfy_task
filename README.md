@@ -18,8 +18,8 @@ A sleek and modern Task Manager application built with React and Node.js. This p
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone [Your-GitHub-Repo-Link]
-   cd firstname_lastname_helfy_task
+   git clone https://github.com/RoiMeshulam/roi_meshulam_helfy_task
+   cd roi_meshulam_helfy_task
 
 2. Install Backend dependencies:
  cd backend
@@ -58,7 +58,7 @@ npm start
 - Edge Cases: Implemented specific logic to handle empty lists and index corrections when the last task in the list is deleted.
 
 ## ⏱️ Time Spent:
-- Backend API: 60 minutes.
-- Frontend & Carousel Logic: 120 minutes.
-- Styling & UI Polish: 45 minutes.
-- Testing & Documentation: 30 minutes
+- Backend API: 35 minutes.
+- Frontend & Carousel Logic: 70 minutes.
+- Styling & UI Polish: 50 minutes.
+- Testing & Documentation: 35 minutes
