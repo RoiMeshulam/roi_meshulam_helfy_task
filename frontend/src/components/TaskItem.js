@@ -29,7 +29,8 @@ const TaskItem = ({ task, onToggle, onDelete, onEdit }) => {
           />
           {task.completed ? 'Completed' : 'Mark as done'}
         </label>
-        <small>{new Date(task.createdAt).toLocaleDateString()}</small>
+        {/* שינוי קטן כאן: הוספנו קלאס ספציפי לתאריך */}
+        <span className="task-date">{new Date(task.createdAt).toLocaleDateString()}</span>
       </div>
     </div>
   );

@@ -1,145 +1,298 @@
-/* מבנה הקרוסלה המרכזי */
-.carousel-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin: 40px auto;
-  max-width: 600px; /* רוחב הקרוסלה */
+/* frontend/src/styles/App.css */
+
+/* --- הגדרות כלליות ומרכוז --- */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7f6;
+  color: #333;
 }
 
-/* החלון שדרכו רואים את המשימות - מסתיר את מה שגולש החוצה */
-.carousel-window {
-  width: 300px; /* רוחב של כרטיס משימה אחד */
-  overflow: hidden; /* קריטי: מסתיר את שאר המשימות במערך */
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-/* המסילה שעליה נוסעות המשימות */
-.carousel-track {
-  display: flex;
-  /* האנימציה עצמה (transition) מנוהלת ישירות דרך ה-React כדי שנוכל לכבות אותה בקפיצות */
-}
-
-/* כל שקופית (משימה) תופסת בדיוק 100% מרוחב החלון */
-.carousel-slide {
-  min-width: 100%;
-  box-sizing: border-box;
-  background-color: #fff;
-}
-
-/* עיצוב בסיסי לכרטיס המשימה עצמו */
-.task-item {
-  padding: 20px;
+.app-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center; /* ממרכז את כל הרכיבים בדף */
 }
 
-/* כפתורי הקרוסלה */
-.carousel-btn {
-  background: #333;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background 0.2s;
+header {
+  text-align: center;
+  margin-bottom: 40px;
+  width: 100%;
 }
 
-.carousel-btn:hover {
-  background: #555;
-}
-
-/* עיצוב תגיות לעדיפות */
-.badge {
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: bold;
+header h1 {
+  margin: 0;
+  color: #2e7d32;
+  font-size: 2.8rem;
   text-transform: uppercase;
+  letter-spacing: 2px;
 }
-.priority-high { background-color: #ffebee; color: #c62828; }
-.priority-medium { background-color: #fff3e0; color: #ef6c00; }
-.priority-low { background-color: #e8f5e9; color: #2e7d32; }
 
-/* עיצוב טופס יצירת המשימות */
+/* --- טופס הוספת משימה (העיצוב המשודרג) --- */
 .task-form {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  max-width: 400px;
-  margin: 0 auto 30px auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  border: 1px solid #eef2f1;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 40px;
   display: flex;
   flex-direction: column;
   gap: 15px;
+  box-sizing: border-box;
 }
 
 .task-form h2 {
-  margin: 0;
-  font-size: 1.2rem;
+  margin: 0 0 10px 0;
+  font-size: 1.5rem;
   color: #333;
+  text-align: center;
 }
 
 .form-group input, 
 .form-group textarea, 
 .form-group select {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 14px;
+  border: 2px solid #f0f0f0;
+  border-radius: 12px;
   font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  background-color: #fafafa;
   box-sizing: border-box;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus, 
+.form-group select:focus {
+  outline: none;
+  border-color: #2e7d32;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
 }
 
 .form-group.row {
   display: flex;
-  gap: 10px;
+  gap: 12px;
+}
+
+.form-group.row select {
+  flex: 1;
 }
 
 .submit-btn {
-  background-color: #2e7d32;
+  background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
   color: white;
   border: none;
-  border-radius: 6px;
-  padding: 10px 15px;
+  border-radius: 12px;
+  padding: 12px 25px;
   cursor: pointer;
-  font-weight: bold;
-  flex-shrink: 0;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.2);
 }
 
 .submit-btn:hover {
-  background-color: #1b5e20;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(46, 125, 50, 0.3);
 }
 
-/* עיצוב כפתורי הסינון */
+.cancel-btn {
+  background: #f5f5f5;
+  color: #666;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 10px;
+  width: 100%;
+}
+
+/* --- כפתורי הסינון --- */
 .task-filter {
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  width: 100%;
 }
 
 .task-filter button {
-  padding: 8px 20px;
+  padding: 10px 25px;
   border: 2px solid #2e7d32;
   background: white;
   color: #2e7d32;
-  border-radius: 20px;
+  border-radius: 25px;
   cursor: pointer;
   font-weight: bold;
   transition: all 0.3s ease;
 }
 
-.task-filter button:hover {
-  background: #e8f5e9;
-}
-
 .task-filter button.active {
   background: #2e7d32;
   color: white;
+}
+
+/* --- הקרוסלה (העיצוב שאהבת) --- */
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.carousel-window {
+  width: 380px;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  background-color: #fff;
+}
+
+.carousel-track {
+  display: flex;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.carousel-btn {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.carousel-btn:hover {
+  background-color: #2e7d32;
+  color: white;
+  transform: scale(1.1);
+}
+
+/* --- כרטיס המשימה (TaskCard) --- */
+.task-item {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 280px;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.task-item.completed h3,
+.task-item.completed p {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.priority-high { background-color: #ffebee; color: #c62828; }
+.priority-medium { background-color: #fff3e0; color: #ef6c00; }
+.priority-low { background-color: #e8f5e9; color: #2e7d32; }
+
+.task-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.task-actions button {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: 0.2s;
+}
+
+/* עריכה - כחול עדין */
+.task-actions button:first-child {
+  color: #1976d2;
+  background: #e3f2fd;
+}
+
+/* מחיקה - אדום עדין */
+.task-actions button:last-child {
+  color: #d32f2f;
+  background: #ffebee;
+}
+
+.task-actions button:hover {
+  filter: brightness(0.95);
+}
+
+.task-content h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #222;
+}
+
+.task-content p {
+  margin: 10px 0 0 0;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.task-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.task-footer label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.task-date {
+  font-size: 0.8rem;
+  color: #888;
+  background-color: #f0f0f0;
+  padding: 4px 10px;
+  border-radius: 6px;
 }
