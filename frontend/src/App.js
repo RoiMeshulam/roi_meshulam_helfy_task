@@ -1,34 +1,75 @@
 import React, { useState, useEffect } from 'react';
-import { fetchTasks } from './services/api';
-import './styles/App.css'; // נכין את הקובץ הזה בהמשך
+import { fetchTasks, createTask, deleteTask, toggleTaskCompletion, updateTask } from './services/api';
 import TaskList from './components/TaskList';
-
+import TaskForm from './components/TaskForm';
+import './styles/App.css';
 
 function App() {
-  // ניהול ה-State המרכזי של האפליקציה [cite: 76]
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
+  // הסטייט החדש ששומר איזו משימה אנחנו עורכים כרגע
+  const [editingTask, setEditingTask] = useState(null);
 
-  // משיכת הנתונים בטעינה הראשונית של הקומפוננטה [cite: 76, 78]
   useEffect(() => {
     const loadTasks = async () => {
       try {
         setLoading(true);
         const data = await fetchTasks();
         setTasks(data);
-        setError(null);
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-
     loadTasks();
-  }, []); // מערך ריק אומר שזה ירוץ רק פעם אחת ב-mount
+  }, []);
 
-  // טיפול במצבי טעינה ושגיאות [cite: 79]
+  const handleAddTask = async (newTaskData) => {
+    try {
+      const createdTask = await createTask(newTaskData);
+      setTasks((prevTasks) => [...prevTasks, createdTask]);
+    } catch (err) {
+      console.error("Failed to add task:", err);
+      alert("Error adding task.");
+    }
+  };
+
+  const handleDeleteTask = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this task?")) return;
+    try {
+      await deleteTask(id);
+      setTasks((prevTasks) => prevTasks.filter(task => task.id !== id));
+    } catch (err) {
+      console.error("Failed to delete task:", err);
+      alert("Error deleting task.");
+    }
+  };
+
+  const handleToggleTask = async (id) => {
+    try {
+      const updatedTask = await toggleTaskCompletion(id);
+      setTasks((prevTasks) => prevTasks.map(task => task.id === id ? updatedTask : task));
+    } catch (err) {
+      console.error("Failed to toggle task:", err);
+      alert("Error updating task status.");
+    }
+  };
+
+  // הפונקציה החדשה שמטפלת בעדכון
+  const handleUpdateTask = async (id, updatedData) => {
+    try {
+      const updatedTask = await updateTask(id, updatedData);
+      setTasks((prevTasks) => prevTasks.map(task => task.id === id ? updatedTask : task));
+      setEditingTask(null); // יציאה ממצב עריכה אחרי ההצלחה
+    } catch (err) {
+      console.error("Failed to update task:", err);
+      alert("Error updating task.");
+    }
+  };
+
   if (loading) return <div className="loading">Loading tasks...</div>;
   if (error) return <div className="error">Error: {error}</div>;
 
@@ -37,15 +78,20 @@ function App() {
       <header>
         <h1>Task Manager</h1>
       </header>
-
+      
       <main>
-        {/* בינתיים נדפיס את הנתונים גולמית כדי לוודא חיבור. 
-            בהמשך נחליף את זה ב-<TaskList tasks={tasks} /> */}
-        <TaskList
-          tasks={tasks}
-          onToggle={(id) => console.log('Toggle', id)}
-          onDelete={(id) => console.log('Delete', id)}
-          onEdit={(task) => console.log('Edit', task)}
+        <TaskForm 
+          onAdd={handleAddTask} 
+          onUpdate={handleUpdateTask}
+          editingTask={editingTask}
+          onCancelEdit={() => setEditingTask(null)}
+        />
+        
+        <TaskList 
+          tasks={tasks} 
+          onToggle={handleToggleTask} 
+          onDelete={handleDeleteTask} 
+          onEdit={(task) => setEditingTask(task)} // כעת לחיצה תכניס את המשימה למצב עריכה
         />
       </main>
     </div>

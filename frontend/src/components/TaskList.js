@@ -1,5 +1,5 @@
 // frontend/src/components/TaskList.js
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import TaskItem from './TaskItem';
 // ודא שהנתיב הזה תואם למיקום קובץ ה-CSS שלך:
 import '../styles/App.css'; 
@@ -9,6 +9,17 @@ const TaskList = ({ tasks, onToggle, onDelete, onEdit }) => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const trackRef = useRef(null);
+
+  useEffect(() => {
+    if (tasks && tasks.length > 0) {
+      // אם מחקנו משימה והאינדקס שלנו עכשיו מצביע "באוויר"
+      if (currentIndex > tasks.length) {
+        setIsTransitioning(false); 
+        setCurrentIndex(tasks.length); 
+      }
+    }
+  
+  }, [tasks.length]);
 
   if (!tasks || tasks.length === 0) {
     return <div className="empty-list">No tasks available. Add some!</div>;

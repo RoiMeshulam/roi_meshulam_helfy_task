@@ -1,22 +1,38 @@
-// frontend/src/components/TaskForm.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/App.css';
 
-const TaskForm = ({ onAdd }) => {
+const TaskForm = ({ onAdd, onUpdate, editingTask, onCancelEdit }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState('medium');
 
+  // כש-editingTask משתנה (כלומר לחצו על Edit), נמלא את הטופס בנתונים שלו
+  useEffect(() => {
+    if (editingTask) {
+      setTitle(editingTask.title);
+      setDescription(editingTask.description || '');
+      setPriority(editingTask.priority);
+    } else {
+      // אם אין משימה בעריכה, נאפס את הטופס
+      setTitle('');
+      setDescription('');
+      setPriority('medium');
+    }
+  }, [editingTask]);
+
   const handleSubmit = (e) => {
-    e.preventDefault(); // מונע רענון של הדף
-    
-    // וולידציה בסיסית [cite: 100]
+    e.preventDefault();
     if (!title.trim()) return;
 
-    // קריאה לפונקציה שקיבלנו מ-App.js
-    onAdd({ title, description, priority });
+    if (editingTask) {
+      // מצב עריכה
+      onUpdate(editingTask.id, { title, description, priority });
+    } else {
+      // מצב יצירה
+      onAdd({ title, description, priority });
+    }
 
-    // איפוס הטופס אחרי השליחה
+    // איפוס אחרי שליחה
     setTitle('');
     setDescription('');
     setPriority('medium');
@@ -24,7 +40,7 @@ const TaskForm = ({ onAdd }) => {
 
   return (
     <form className="task-form" onSubmit={handleSubmit}>
-      <h2>Add New Task</h2>
+      <h2>{editingTask ? 'Edit Task' : 'Add New Task'}</h2>
       
       <div className="form-group">
         <input 
@@ -50,7 +66,16 @@ const TaskForm = ({ onAdd }) => {
           <option value="medium">Medium Priority</option>
           <option value="high">High Priority</option>
         </select>
-        <button type="submit" className="submit-btn">Add Task</button>
+        <button type="submit" className="submit-btn">
+          {editingTask ? 'Update Task' : 'Add Task'}
+        </button>
+        
+        {/* כפתור ביטול שמופיע רק במצב עריכה */}
+        {editingTask && (
+          <button type="button" className="cancel-btn" onClick={onCancelEdit}>
+            Cancel
+          </button>
+        )}
       </div>
     </form>
   );

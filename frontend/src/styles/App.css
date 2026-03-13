@@ -65,3 +65,53 @@
 .priority-high { background-color: #ffebee; color: #c62828; }
 .priority-medium { background-color: #fff3e0; color: #ef6c00; }
 .priority-low { background-color: #e8f5e9; color: #2e7d32; }
+
+/* עיצוב טופס יצירת המשימות */
+.task-form {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  max-width: 400px;
+  margin: 0 auto 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.task-form h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.form-group input, 
+.form-group textarea, 
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.form-group.row {
+  display: flex;
+  gap: 10px;
+}
+
+.submit-btn {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.submit-btn:hover {
+  background-color: #1b5e20;
+}
