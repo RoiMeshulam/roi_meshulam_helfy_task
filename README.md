@@ -1,13 +1,13 @@
 # Helfy Task Manager - Home Assignment
 
-A sleek and modern Task Manager application built with React and Node.js. [cite_start]This project features a custom-built infinite carousel for task management, as required by the technical assessment[cite: 3, 5].
+A sleek and modern Task Manager application built with React and Node.js. This project features a custom-built infinite carousel for task management, as required by the technical assessment.
 
 ## 🚀 Features
-- [cite_start]**Endless Carousel**: A custom-implemented animated carousel with smooth infinite looping, built from scratch without external libraries [cite: 63-68, 77, 121].
-- [cite_start]**Full CRUD**: Create, Read, Update, and Delete tasks with a real Express backend[cite: 97].
-- [cite_start]**Task Filtering**: Filter tasks by All, Active, or Completed status[cite: 73].
-- [cite_start]**Priority Indication**: Visual badges and color-coded priorities (High, Medium, Low)[cite: 74].
-- [cite_start]**Confirmation Flow**: Secure deletion process with user confirmation[cite: 71].
+- **Endless Carousel**: A custom-implemented animated carousel with smooth infinite looping, built from scratch without external libraries .
+- **Full CRUD**: Create, Read, Update, and Delete tasks with a real Express backend.
+- **Task Filtering**: Filter tasks by All, Active, or Completed status.
+- **Priority Indication**: Visual badges and color-coded priorities (High, Medium, Low).
+- **Confirmation Flow**: Secure deletion process with user confirmation.
 
 ## 🛠️ Setup and Installation
 
