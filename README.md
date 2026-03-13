@@ -19,31 +19,34 @@ A sleek and modern Task Manager application built with React and Node.js. This p
 1. Clone the repository:
    ```bash
    git clone https://github.com/RoiMeshulam/roi_meshulam_helfy_task
-   cd roi_meshulam_helfy_task
+   cd roi_meshulam_helfy_task```
 
 2. Install Backend dependencies:
 ```bash
  cd backend
  npm install
+ ```
 
 4. Install Frontend dependencies:
 ```Bash
 cd ../frontend
 npm install
+```
 
 ## 💻 How to Run:
-```Bash
 1. Start the Backend (Port 4000)
 From the backend directory:
 
 ```Bash
 npm start
+```
 
 2. Start the Frontend (Port 3000)
 From the frontend directory:
 
 ```Bash
 npm start
+```
 
 ## 📡 API Documentation:
 - The REST API includes the following endpoints :GET /api/tasks - Retrieve all tasks.
