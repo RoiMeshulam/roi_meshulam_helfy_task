@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchTasks, createTask, deleteTask, toggleTaskCompletion, updateTask } from './services/api';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
+import TaskFilter from './components/TaskFilter';
 import './styles/App.css';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   
   // הסטייט החדש ששומר איזו משימה אנחנו עורכים כרגע
   const [editingTask, setEditingTask] = useState(null);
+  const [filter, setFilter] = useState('all');
 
   useEffect(() => {
     const loadTasks = async () => {
@@ -70,6 +72,12 @@ function App() {
     }
   };
 
+  const filteredTasks = tasks.filter(task => {
+    if (filter === 'completed') return task.completed;
+    if (filter === 'active') return !task.completed;
+    return true; 
+  });
+
   if (loading) return <div className="loading">Loading tasks...</div>;
   if (error) return <div className="error">Error: {error}</div>;
 
@@ -78,7 +86,6 @@ function App() {
       <header>
         <h1>Task Manager</h1>
       </header>
-      
       <main>
         <TaskForm 
           onAdd={handleAddTask} 
@@ -86,12 +93,16 @@ function App() {
           editingTask={editingTask}
           onCancelEdit={() => setEditingTask(null)}
         />
-        
+
+        {/* רכיב הסינון החדש שלנו */}
+        <TaskFilter currentFilter={filter} onFilterChange={setFilter} />
+
+        {/* מעבירים את המערך המסונן במקום המקורי */}
         <TaskList 
-          tasks={tasks} 
+          tasks={filteredTasks} 
           onToggle={handleToggleTask} 
           onDelete={handleDeleteTask} 
-          onEdit={(task) => setEditingTask(task)} // כעת לחיצה תכניס את המשימה למצב עריכה
+          onEdit={(task) => setEditingTask(task)} 
         />
       </main>
     </div>
