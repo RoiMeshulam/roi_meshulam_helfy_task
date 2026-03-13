@@ -1,5 +1,7 @@
 # Helfy Task Manager - Home Assignment
 
+![App Screenshot](screenshot.png)
+
 A sleek and modern Task Manager application built with React and Node.js. This project features a custom-built infinite carousel for task management, as required by the technical assessment.
 
 ## 🚀 Features
