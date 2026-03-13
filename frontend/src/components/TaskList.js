@@ -1,7 +1,6 @@
 // frontend/src/components/TaskList.js
 import React, { useState, useEffect, useRef } from 'react';
 import TaskItem from './TaskItem';
-// ודא שהנתיב הזה תואם למיקום קובץ ה-CSS שלך:
 import '../styles/App.css'; 
 
 const TaskList = ({ tasks, onToggle, onDelete, onEdit }) => {
@@ -25,7 +24,7 @@ const TaskList = ({ tasks, onToggle, onDelete, onEdit }) => {
     return <div className="empty-list">No tasks available. Add some!</div>;
   }
 
-  // הטריק לקרוסלה אינסופית: עוטפים את המערך בשכפולים של הקצוות [cite: 63-68, 77]
+  // הטריק לקרוסלה אינסופית: עוטפים את המערך בשכפולים של הקצוות 
   const extendedTasks = [
     tasks[tasks.length - 1], 
     ...tasks, 
