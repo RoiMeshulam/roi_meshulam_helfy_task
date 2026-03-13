@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { fetchTasks } from './services/api';
 import './styles/App.css'; // נכין את הקובץ הזה בהמשך
+import TaskList from './components/TaskList';
+
 
 function App() {
   // ניהול ה-State המרכזי של האפליקציה [cite: 76]
@@ -35,13 +37,16 @@ function App() {
       <header>
         <h1>Task Manager</h1>
       </header>
-      
+
       <main>
         {/* בינתיים נדפיס את הנתונים גולמית כדי לוודא חיבור. 
             בהמשך נחליף את זה ב-<TaskList tasks={tasks} /> */}
-        <pre style={{ textAlign: 'left', background: '#f4f4f4', padding: '1rem' }}>
-          {JSON.stringify(tasks, null, 2)}
-        </pre>
+        <TaskList
+          tasks={tasks}
+          onToggle={(id) => console.log('Toggle', id)}
+          onDelete={(id) => console.log('Delete', id)}
+          onEdit={(task) => console.log('Edit', task)}
+        />
       </main>
     </div>
   );

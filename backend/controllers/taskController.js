@@ -2,14 +2,9 @@
 
 // In-memory data storage 
 let tasks = [
-    {
-        id: 1,
-        title: "Initial Task",
-        description: "This is a sample task to test the API",
-        completed: false,
-        createdAt: new Date(),
-        priority: "medium" // 'low' | 'medium' | 'high' [cite: 30]
-    }
+    { id: 1, title: "Initial Task", description: "This is a sample task to test the API", completed: false, createdAt: new Date(), priority: "medium" },
+    { id: 2, title: "Learn Next.js", description: "Prepare for the new role", completed: false, createdAt: new Date(), priority: "high" },
+    { id: 3, title: "Upgrade car multimedia", description: "Find a good system for the Toyota Yaris", completed: true, createdAt: new Date(), priority: "low" }
 ];
 
 // GET /api/tasks - get all tasks
